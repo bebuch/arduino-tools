@@ -35,7 +35,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake
 
 # other subdirectories
 # only add if not inside add_subdirectory()
-option(ARDUINO_TOOLS_BUILD_TESTS "build tests" OFF)
+option(ARDUINO_TOOLS_BUILD_TESTS "build tests" ON)
 
 if(${ARDUINO_TOOLS_BUILD_TESTS})
     enable_testing()
