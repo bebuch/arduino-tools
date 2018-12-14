@@ -33,20 +33,25 @@ namespace{
 
 }
 
-#include <stepper_state_4.hpp>
+#include <stepper_state_8.hpp>
 
 
 namespace{
 
 
-	TEST(stepper_state_4, start_forward){
+	TEST(stepper_state_8, start_forward){
 		digitalWrite.reset();
 		ASSERT_EQ(digitalWrite.pins, (std::array{-1, -1, -1, -1}));
 
-		tools::stepper_state_4< 0, 1, 2, 3 > state;
+		tools::stepper_state_8< 0, 1, 2, 3 > state;
 
 		state.set();
 		ASSERT_EQ(digitalWrite.pins, (std::array{HIGH, HIGH, LOW, LOW}));
+		digitalWrite.reset();
+
+		state.next();
+		state.set();
+		ASSERT_EQ(digitalWrite.pins, (std::array{LOW, HIGH, LOW, LOW}));
 		digitalWrite.reset();
 
 		state.next();
@@ -56,12 +61,27 @@ namespace{
 
 		state.next();
 		state.set();
+		ASSERT_EQ(digitalWrite.pins, (std::array{LOW, LOW, HIGH, LOW}));
+		digitalWrite.reset();
+
+		state.next();
+		state.set();
 		ASSERT_EQ(digitalWrite.pins, (std::array{LOW, LOW, HIGH, HIGH}));
 		digitalWrite.reset();
 
 		state.next();
 		state.set();
+		ASSERT_EQ(digitalWrite.pins, (std::array{LOW, LOW, LOW, HIGH}));
+		digitalWrite.reset();
+
+		state.next();
+		state.set();
 		ASSERT_EQ(digitalWrite.pins, (std::array{HIGH, LOW, LOW, HIGH}));
+		digitalWrite.reset();
+
+		state.next();
+		state.set();
+		ASSERT_EQ(digitalWrite.pins, (std::array{HIGH, LOW, LOW, LOW}));
 		digitalWrite.reset();
 
 		state.next();
@@ -71,7 +91,17 @@ namespace{
 
 		state.prev();
 		state.set();
+		ASSERT_EQ(digitalWrite.pins, (std::array{HIGH, LOW, LOW, LOW}));
+		digitalWrite.reset();
+
+		state.prev();
+		state.set();
 		ASSERT_EQ(digitalWrite.pins, (std::array{HIGH, LOW, LOW, HIGH}));
+		digitalWrite.reset();
+
+		state.prev();
+		state.set();
+		ASSERT_EQ(digitalWrite.pins, (std::array{LOW, LOW, LOW, HIGH}));
 		digitalWrite.reset();
 
 		state.prev();
@@ -81,7 +111,17 @@ namespace{
 
 		state.prev();
 		state.set();
+		ASSERT_EQ(digitalWrite.pins, (std::array{LOW, LOW, HIGH, LOW}));
+		digitalWrite.reset();
+
+		state.prev();
+		state.set();
 		ASSERT_EQ(digitalWrite.pins, (std::array{LOW, HIGH, HIGH, LOW}));
+		digitalWrite.reset();
+
+		state.prev();
+		state.set();
+		ASSERT_EQ(digitalWrite.pins, (std::array{LOW, HIGH, LOW, LOW}));
 		digitalWrite.reset();
 
 		state.prev();
@@ -91,13 +131,19 @@ namespace{
 	}
 
 
-	TEST(stepper_state_4, start_backward){
+	TEST(stepper_state_8, start_backward){
 		digitalWrite.reset();
 		ASSERT_EQ(digitalWrite.pins, (std::array{-1, -1, -1, -1}));
 
-		tools::stepper_state_4< 0, 1, 2, 3 > state;
+		tools::stepper_state_8< 0, 1, 2, 3 > state;
+
 		state.set();
 		ASSERT_EQ(digitalWrite.pins, (std::array{HIGH, HIGH, LOW, LOW}));
+		digitalWrite.reset();
+
+		state.prev();
+		state.set();
+		ASSERT_EQ(digitalWrite.pins, (std::array{HIGH, LOW, LOW, LOW}));
 		digitalWrite.reset();
 
 		state.prev();
@@ -107,12 +153,27 @@ namespace{
 
 		state.prev();
 		state.set();
+		ASSERT_EQ(digitalWrite.pins, (std::array{LOW, LOW, LOW, HIGH}));
+		digitalWrite.reset();
+
+		state.prev();
+		state.set();
 		ASSERT_EQ(digitalWrite.pins, (std::array{LOW, LOW, HIGH, HIGH}));
 		digitalWrite.reset();
 
 		state.prev();
 		state.set();
+		ASSERT_EQ(digitalWrite.pins, (std::array{LOW, LOW, HIGH, LOW}));
+		digitalWrite.reset();
+
+		state.prev();
+		state.set();
 		ASSERT_EQ(digitalWrite.pins, (std::array{LOW, HIGH, HIGH, LOW}));
+		digitalWrite.reset();
+
+		state.prev();
+		state.set();
+		ASSERT_EQ(digitalWrite.pins, (std::array{LOW, HIGH, LOW, LOW}));
 		digitalWrite.reset();
 
 		state.prev();
@@ -122,7 +183,17 @@ namespace{
 
 		state.next();
 		state.set();
+		ASSERT_EQ(digitalWrite.pins, (std::array{LOW, HIGH, LOW, LOW}));
+		digitalWrite.reset();
+
+		state.next();
+		state.set();
 		ASSERT_EQ(digitalWrite.pins, (std::array{LOW, HIGH, HIGH, LOW}));
+		digitalWrite.reset();
+
+		state.next();
+		state.set();
+		ASSERT_EQ(digitalWrite.pins, (std::array{LOW, LOW, HIGH, LOW}));
 		digitalWrite.reset();
 
 		state.next();
@@ -132,7 +203,17 @@ namespace{
 
 		state.next();
 		state.set();
+		ASSERT_EQ(digitalWrite.pins, (std::array{LOW, LOW, LOW, HIGH}));
+		digitalWrite.reset();
+
+		state.next();
+		state.set();
 		ASSERT_EQ(digitalWrite.pins, (std::array{HIGH, LOW, LOW, HIGH}));
+		digitalWrite.reset();
+
+		state.next();
+		state.set();
+		ASSERT_EQ(digitalWrite.pins, (std::array{HIGH, LOW, LOW, LOW}));
 		digitalWrite.reset();
 
 		state.next();

@@ -1,12 +1,12 @@
-#ifndef _arduino_tools__stepper_state__hpp_INCLUDED_
-#define _arduino_tools__stepper_state__hpp_INCLUDED_
+#ifndef _arduino_tools__stepper_state_4__hpp_INCLUDED_
+#define _arduino_tools__stepper_state_4__hpp_INCLUDED_
 
 
 namespace tools{
 
 
 	template < int Pin0, int Pin1, int Pin2, int Pin3 >
-	class stepper_state{
+	class stepper_state_4{
 	public:
 		void set(){
 			digitalWrite(Pin0, (pos_ & 0b0001) ? HIGH : LOW);
@@ -15,18 +15,18 @@ namespace tools{
 			digitalWrite(Pin3, (pos_ & 0b1000) ? HIGH : LOW);
 		}
 
-		void prev(){
+		constexpr void prev()noexcept{
 			pos_ |= (pos_ & 0b00000001) << 4;
 			pos_ >>= 1;
 		}
 
-		void next(){
+		constexpr void next()noexcept{
 			pos_ <<= 1;
 			pos_ |= (pos_ & 0b00010000) >> 4;
 		}
 
 	private:
-		unsigned char pos_ = 0b00001001;
+		unsigned char pos_ = 0b00000011;
 	};
 
 
