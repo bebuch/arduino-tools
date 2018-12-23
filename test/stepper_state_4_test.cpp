@@ -142,4 +142,14 @@ namespace{
 	}
 
 
+	TEST(stepper_state_4, unset){
+		digitalWrite.reset();
+		ASSERT_EQ(digitalWrite.pins, (std::array{-1, -1, -1, -1}));
+
+		tools::stepper_state_4< 0, 1, 2, 3 > state;
+		state.unset();
+		ASSERT_EQ(digitalWrite.pins, (std::array{LOW, LOW, LOW, LOW}));
+	}
+
+
 }

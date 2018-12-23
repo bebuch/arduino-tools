@@ -17,6 +17,13 @@ namespace tools{
 			digitalWrite(Pin3, (pos_ & 0b01000000) ? HIGH : LOW);
 		}
 
+		void unset(){
+			digitalWrite(Pin0, LOW);
+			digitalWrite(Pin1, LOW);
+			digitalWrite(Pin2, LOW);
+			digitalWrite(Pin3, LOW);
+		}
+
 		constexpr void prev()noexcept{
 			pos_ = rotate(pos_, -1);
 		}
